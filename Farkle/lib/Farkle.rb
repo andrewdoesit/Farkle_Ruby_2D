@@ -16,119 +16,172 @@ if that doesnt work create a new sprite image to overlay the old sprite image
 
 rollButton = Rectangle.new( x: 225, y: 180, width: 200, height: 100, color: 'red' )
 text = Text.new( 'Roll', x: 250, y: 200, size: 75, color: 'white' )
-@die = nil
 
+# Create all the dice for the slots within lists 
 
-@dieOne = Sprite.new('Sprites/dieWhite1.png')
-@dieTwo = Sprite.new('Sprites/dieWhite2.png')
-@dieThree = Sprite.new('Sprites/dieWhite3.png')
-@dieFour = Sprite.new('Sprites/dieWhite4.png')
-@dieFive = Sprite.new('Sprites/dieWhite5.png')
-@dieSix = Sprite.new('Sprites/dieWhite6.png')
-# TODO: call the reset method to reset the dice
+@diceSlotOne = [
+  Sprite.new('Sprites/dieWhite1.png', x: 100, y: 100),
+  Sprite.new('Sprites/dieWhite2.png', x: 100, y: 100),
+  Sprite.new('Sprites/dieWhite3.png', x: 100, y: 100),
+  Sprite.new('Sprites/dieWhite4.png', x: 100, y: 100),
+  Sprite.new('Sprites/dieWhite5.png', x: 100, y: 100),
+  Sprite.new('Sprites/dieWhite6.png', x: 100, y: 100)
+]
 
+@diceSlotTwo = [
+  Sprite.new('Sprites/dieWhite1.png', x: 300, y: 100),
+  Sprite.new('Sprites/dieWhite2.png', x: 300, y: 100),
+  Sprite.new('Sprites/dieWhite3.png', x: 300, y: 100),
+  Sprite.new('Sprites/dieWhite4.png', x: 300, y: 100),
+  Sprite.new('Sprites/dieWhite5.png', x: 300, y: 100),
+  Sprite.new('Sprites/dieWhite6.png', x: 300, y: 100)
+]
+
+@diceSlotThree = [
+  Sprite.new('Sprites/dieWhite1.png', x: 500, y: 100),
+  Sprite.new('Sprites/dieWhite2.png', x: 500, y: 100),
+  Sprite.new('Sprites/dieWhite3.png', x: 500, y: 100),
+  Sprite.new('Sprites/dieWhite4.png', x: 500, y: 100),
+  Sprite.new('Sprites/dieWhite5.png', x: 500, y: 100),
+  Sprite.new('Sprites/dieWhite6.png', x: 500, y: 100)
+]
+
+@diceSlotFour = [
+  Sprite.new('Sprites/dieWhite1.png', x: 100, y: 300),
+  Sprite.new('Sprites/dieWhite2.png', x: 100, y: 300),
+  Sprite.new('Sprites/dieWhite3.png', x: 100, y: 300),
+  Sprite.new('Sprites/dieWhite4.png', x: 100, y: 300),
+  Sprite.new('Sprites/dieWhite5.png', x: 100, y: 300),
+  Sprite.new('Sprites/dieWhite6.png', x: 100, y: 300)
+]
+
+@diceSlotFive = [
+  Sprite.new('Sprites/dieWhite1.png', x: 300, y: 300),
+  Sprite.new('Sprites/dieWhite2.png', x: 300, y: 300),
+  Sprite.new('Sprites/dieWhite3.png', x: 300, y: 300),
+  Sprite.new('Sprites/dieWhite4.png', x: 300, y: 300),
+  Sprite.new('Sprites/dieWhite5.png', x: 300, y: 300),
+  Sprite.new('Sprites/dieWhite6.png', x: 300, y: 300)
+]
+
+@diceSlotSix = [
+  Sprite.new('Sprites/dieWhite1.png', x: 500, y: 300),
+  Sprite.new('Sprites/dieWhite2.png', x: 500, y: 300),
+  Sprite.new('Sprites/dieWhite3.png', x: 500, y: 300),
+  Sprite.new('Sprites/dieWhite4.png', x: 500, y: 300),
+  Sprite.new('Sprites/dieWhite5.png', x: 500, y: 300),
+  Sprite.new('Sprites/dieWhite6.png', x: 500, y: 300)
+]
+
+  def clearDiceSlots
+    @diceSlotOne.each do |die|
+      die.remove
+    end
+    @diceSlotTwo.each do |die|
+      die.remove
+    end
+    @diceSlotThree.each do |die|
+      die.remove
+    end
+    @diceSlotFour.each do |die|
+      die.remove
+    end
+    @diceSlotFive.each do |die|
+      die.remove
+    end
+    @diceSlotSix.each do |die|
+      die.remove
+  end
+end
+clearDiceSlots
 
 
 def roll
     @roll = [*1..6].sample
-    case @roll
-    when 1 
-      @die = @dieOne
-    when 2
-      @die = @dieTwo
-    when 3
-      @die = @dieThree
-    when 4
-      @die = @dieFour
-    when 5
-      @die = @dieFive
-    when 6
-      @die =@dieSix
-    end
-    #@die.add
-
     puts "You rolled a #{@roll}"
   end
 
-def resetDice
-    @dieOne.remove
-    @dieTwo.remove
-    @dieThree.remove
-    @dieFour.remove
-    @dieFive.remove
-    @dieSix.remove
-  end
  
 
   #TODO: if the dice eqaul the same value then show both of them on the screen
 
 def dieSlotOne
     roll
-    @slotOne = @die
-    if @slotOne == @slotTwo or @slotOne == @slotThree or @slotOne == @slotFour or @slotOne == @slotFive or @slotOne == @slotSix
-        @slotOne.add
-    end
-    @slotOne.x = 100
-    @slotOne.y = 100
-    @slotOne.add
+    case @roll
+    when 1 then @slotOne = @diceSlotOne[0]
+    when 2 then @slotOne = @diceSlotOne[1]
+    when 3 then @slotOne = @diceSlotOne[2]
+    when 4 then @slotOne = @diceSlotOne[3]
+    when 5 then @slotOne = @diceSlotOne[4]
+    when 6 then @slotOne = @diceSlotOne[5]
   end
+  @slotOne.add
+end
 
 
 def dieSlotTwo
     roll
-    @slotTwo = @die
-    @slotTwo.x = 300
-    @slotTwo.y = 100
-    # TODO: if the dice eqaul the same value then show both of them on the screen
-    if @slotTwo == @slotOne or @slotTwo == @slotThree or @slotTwo == @slotFour or @slotTwo == @slotFive or @slotTwo == @slotSix
-        @slotTwo.add
-
-    end
-    @slotTwo.add
+    case @roll
+    when 1 then @slotTwo = @diceSlotTwo[0]
+    when 2 then @slotTwo = @diceSlotTwo[1]
+    when 3 then @slotTwo = @diceSlotTwo[2]
+    when 4 then @slotTwo = @diceSlotTwo[3]
+    when 5 then @slotTwo = @diceSlotTwo[4]
+    when 6 then @slotTwo = @diceSlotTwo[5]
   end
+  @slotTwo.add
+end
 
 def dieSlotThree
     roll
-    @slotThree = @die
-    @slotThree.x = 500
-    @slotThree.y = 100
-    if @slotThree == @slotOne or @slotThree == @slotTwo or @slotThree == @slotFour or @slotThree == @slotFive or @slotThree == @slotSix
-        @slotThree.add
-    end
-    @slotThree.add
+    case @roll
+    when 1 then @slotThree = @diceSlotThree[0]
+    when 2 then @slotThree = @diceSlotThree[1]
+    when 3 then @slotThree = @diceSlotThree[2]
+    when 4 then @slotThree = @diceSlotThree[3]
+    when 5 then @slotThree = @diceSlotThree[4]
+    when 6 then @slotThree = @diceSlotThree[5]
+  end
+  @slotThree.add
 end
 
 def dieSlotFour
     roll
-    @slotFour = @die
-    @slotFour.x = 100
-    @slotFour.y = 300
-    if @slotFour == @slotOne or @slotFour == @slotTwo or @slotFour == @slotThree or @slotFour == @slotFive or @slotFour == @slotSix
-        @slotFour.add
-    end
-    @slotFour.add
+    case @roll
+    when 1 then @slotFour = @diceSlotFour[0]
+    when 2 then @slotFour = @diceSlotFour[1]
+    when 3 then @slotFour = @diceSlotFour[2]
+    when 4 then @slotFour = @diceSlotFour[3]
+    when 5 then @slotFour = @diceSlotFour[4]
+    when 6 then @slotFour = @diceSlotFour[5]
+  end
+  @slotFour.add
 end
 
 def dieSlotFive
     roll
-    @slotFive = @die
-    @slotFive.x = 300
-    @slotFive.y = 300
-    if @slotFive == @slotOne or @slotFive == @slotTwo or @slotFive == @slotThree or @slotFive == @slotFour or @slotFive == @slotSix
-        @slotFive.add
-    end
-    @slotFive.add
+    case @roll
+    when 1 then @slotFive = @diceSlotFive[0]
+    when 2 then @slotFive = @diceSlotFive[1]
+    when 3 then @slotFive = @diceSlotFive[2]
+    when 4 then @slotFive = @diceSlotFive[3]
+    when 5 then @slotFive = @diceSlotFive[4]
+    when 6 then @slotFive = @diceSlotFive[5]
+  end
+  @slotFive.add
 end
 
 def dieSlotSix
     roll
-    @slotSix = @die
-    @slotSix.x = 500
-    @slotSix.y = 300
-    if @slotSix == @slotOne or @slotSix == @slotTwo or @slotSix == @slotThree or @slotSix == @slotFour or @slotSix == @slotFive
-        @slotSix.add
-    end
-    @slotSix.add
+    case @roll
+    when 1 then @slotSix = @diceSlotSix[0]
+    when 2 then @slotSix = @diceSlotSix[1]
+    when 3 then @slotSix = @diceSlotSix[2]
+    when 4 then @slotSix = @diceSlotSix[3]
+    when 5 then @slotSix = @diceSlotSix[4]
+    when 6 then @slotSix = @diceSlotSix[5]
+  end
+  @slotSix.add
 end
 
 def rollAllDice
@@ -138,10 +191,9 @@ def rollAllDice
     dieSlotFour
     dieSlotFive
     dieSlotSix
+
 end
 
-#update do
-#end
 
 =begin
 This is for all the mouse events
@@ -153,58 +205,55 @@ on :mouse_down do |event|
   puts event.x, event.y
   # This is for Slot 1
   if event.x > 100 && event.x < 200 && event.y > 100 && event.y < 200
-    # TODO: find out how to add the sprite to the object
     @slotOne.remove
-    @slotOne.x = 50
-    @slotOne.y = 25
+    @slotOne.x = 20
+    @slotOne.y = 20
     @slotOne.add
   end
 
   # This is for Slot 2
   if event.x > 300 && event.x < 400 && event.y > 100 && event.y < 200
     @slotTwo.remove
-    @slotTwo.x = 150
-    @slotTwo.y = 25
+    @slotTwo.x = 100
+    @slotTwo.y = 20
     @slotTwo.add
   end
 
   # This is for Slot 3
   if event.x > 500 && event.x < 600 && event.y > 100 && event.y < 200
     @slotThree.remove
-    @slotThree.x = 250
-    @slotThree.y = 25
+    @slotThree.x = 180
+    @slotThree.y = 20
     @slotThree.add
   end
 
   # This is for Slot 4
   if event.x > 100 && event.x < 200 && event.y > 300 && event.y < 400
     @slotFour.remove
-    @slotFour.x = 50
-    @slotFour.y = 125
+    @slotFour.x = 260
+    @slotFour.y = 20
     @slotFour.add
   end
 
   # This is for Slot 5
   if event.x > 300 && event.x < 400 && event.y > 300 && event.y < 400
     @slotFive.remove
-    @slotFive.x = 150
-    @slotFive.y = 125
+    @slotFive.x = 340
+    @slotFive.y = 20
     @slotFive.add
   end
 
   # This is for Slot 6
   if event.x > 500 && event.x < 600 && event.y > 300 && event.y < 400
     @slotSix.remove
-    @slotSix.x = 250
-    @slotSix.y = 125
+    @slotSix.x = 420
+    @slotSix.y = 20
     @slotSix.add
   end
 
   # This is for the roll button
-  # TODO: Find out why it wont show the dieSlotOne and dieSlotTwo at the same time if the dice are the same value
-  
   if event.x > 225 && event.x < 425 && event.y > 180 && event.y < 280
-    resetDice
+    
     rollAllDice
   end
 
