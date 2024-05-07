@@ -16,6 +16,8 @@ if that doesnt work create a new sprite image to overlay the old sprite image
 
 rollButton = Rectangle.new( x: 225, y: 180, width: 200, height: 100, color: 'red' )
 text = Text.new( 'Roll', x: 250, y: 200, size: 75, color: 'white' )
+@diceList = []
+@playerList = []
 
 # Create all the dice for the slots within lists 
 
@@ -93,7 +95,6 @@ text = Text.new( 'Roll', x: 250, y: 200, size: 75, color: 'white' )
       die.remove
   end
 end
-clearDiceSlots
 
 
 def roll
@@ -101,87 +102,109 @@ def roll
     puts "You rolled a #{@roll}"
   end
 
- 
-
   #TODO: if the dice eqaul the same value then show both of them on the screen
 
 def dieSlotOne
-    roll
-    case @roll
-    when 1 then @slotOne = @diceSlotOne[0]
-    when 2 then @slotOne = @diceSlotOne[1]
-    when 3 then @slotOne = @diceSlotOne[2]
-    when 4 then @slotOne = @diceSlotOne[3]
-    when 5 then @slotOne = @diceSlotOne[4]
-    when 6 then @slotOne = @diceSlotOne[5]
+  unless @diceList.include?(@slotOne) or !@diceList.include?(@slotOne)
+      roll
+      case @roll
+      when 1 then @slotOne = @diceSlotOne[0]
+      when 2 then @slotOne = @diceSlotOne[1]
+      when 3 then @slotOne = @diceSlotOne[2]
+      when 4 then @slotOne = @diceSlotOne[3]
+      when 5 then @slotOne = @diceSlotOne[4]
+      when 6 then @slotOne = @diceSlotOne[5]
+    end
+    @diceList << @slotOne
+  else
+    puts "You can't roll the same dice twice!"
   end
-  @slotOne.add
 end
 
 
 def dieSlotTwo
-    roll
-    case @roll
-    when 1 then @slotTwo = @diceSlotTwo[0]
-    when 2 then @slotTwo = @diceSlotTwo[1]
-    when 3 then @slotTwo = @diceSlotTwo[2]
-    when 4 then @slotTwo = @diceSlotTwo[3]
-    when 5 then @slotTwo = @diceSlotTwo[4]
-    when 6 then @slotTwo = @diceSlotTwo[5]
+  unless @diceList.include?(@slotTwo)
+      roll
+      case @roll
+      when 1 then @slotTwo = @diceSlotTwo[0]
+      when 2 then @slotTwo = @diceSlotTwo[1]
+      when 3 then @slotTwo = @diceSlotTwo[2]
+      when 4 then @slotTwo = @diceSlotTwo[3]
+      when 5 then @slotTwo = @diceSlotTwo[4]
+      when 6 then @slotTwo = @diceSlotTwo[5]
+    end
+    @diceList << @slotTwo
+  else
+    puts "You can't roll the same dice twice!"
   end
-  @slotTwo.add
 end
 
 def dieSlotThree
-    roll
-    case @roll
-    when 1 then @slotThree = @diceSlotThree[0]
-    when 2 then @slotThree = @diceSlotThree[1]
-    when 3 then @slotThree = @diceSlotThree[2]
-    when 4 then @slotThree = @diceSlotThree[3]
-    when 5 then @slotThree = @diceSlotThree[4]
-    when 6 then @slotThree = @diceSlotThree[5]
+  unless @diceList.include?(@slotThree)
+      roll
+      case @roll
+      when 1 then @slotThree = @diceSlotThree[0]
+      when 2 then @slotThree = @diceSlotThree[1]
+      when 3 then @slotThree = @diceSlotThree[2]
+      when 4 then @slotThree = @diceSlotThree[3]
+      when 5 then @slotThree = @diceSlotThree[4]
+      when 6 then @slotThree = @diceSlotThree[5]
+    end
+    @diceList << @slotThree
+  else
+    puts "You can't roll the same dice twice!"
   end
-  @slotThree.add
 end
 
 def dieSlotFour
-    roll
-    case @roll
-    when 1 then @slotFour = @diceSlotFour[0]
-    when 2 then @slotFour = @diceSlotFour[1]
-    when 3 then @slotFour = @diceSlotFour[2]
-    when 4 then @slotFour = @diceSlotFour[3]
-    when 5 then @slotFour = @diceSlotFour[4]
-    when 6 then @slotFour = @diceSlotFour[5]
+  unless @diceList.include?(@slotFour)
+      roll
+      case @roll
+      when 1 then @slotFour = @diceSlotFour[0]
+      when 2 then @slotFour = @diceSlotFour[1]
+      when 3 then @slotFour = @diceSlotFour[2]
+      when 4 then @slotFour = @diceSlotFour[3]
+      when 5 then @slotFour = @diceSlotFour[4]
+      when 6 then @slotFour = @diceSlotFour[5]
+    end
+    @diceList << @slotFour
+  else
+    puts "You can't roll the same dice twice!"
   end
-  @slotFour.add
 end
 
 def dieSlotFive
-    roll
-    case @roll
-    when 1 then @slotFive = @diceSlotFive[0]
-    when 2 then @slotFive = @diceSlotFive[1]
-    when 3 then @slotFive = @diceSlotFive[2]
-    when 4 then @slotFive = @diceSlotFive[3]
-    when 5 then @slotFive = @diceSlotFive[4]
-    when 6 then @slotFive = @diceSlotFive[5]
+  unless @diceList.include?(@slotFive)
+      roll
+      case @roll
+      when 1 then @slotFive = @diceSlotFive[0]
+      when 2 then @slotFive = @diceSlotFive[1]
+      when 3 then @slotFive = @diceSlotFive[2]
+      when 4 then @slotFive = @diceSlotFive[3]
+      when 5 then @slotFive = @diceSlotFive[4]
+      when 6 then @slotFive = @diceSlotFive[5]
+    end
+    @diceList << @slotFive
+  else
+    puts "You can't roll the same dice twice!"
   end
-  @slotFive.add
 end
 
 def dieSlotSix
-    roll
-    case @roll
-    when 1 then @slotSix = @diceSlotSix[0]
-    when 2 then @slotSix = @diceSlotSix[1]
-    when 3 then @slotSix = @diceSlotSix[2]
-    when 4 then @slotSix = @diceSlotSix[3]
-    when 5 then @slotSix = @diceSlotSix[4]
-    when 6 then @slotSix = @diceSlotSix[5]
+  unless @diceList.include?(@slotSix)
+      roll
+      case @roll
+      when 1 then @slotSix = @diceSlotSix[0]
+      when 2 then @slotSix = @diceSlotSix[1]
+      when 3 then @slotSix = @diceSlotSix[2]
+      when 4 then @slotSix = @diceSlotSix[3]
+      when 5 then @slotSix = @diceSlotSix[4]
+      when 6 then @slotSix = @diceSlotSix[5]
+    end
+    @diceList << @slotSix
+  else
+    puts "You can't roll the same dice twice!"
   end
-  @slotSix.add
 end
 
 def rollAllDice
@@ -191,9 +214,13 @@ def rollAllDice
     dieSlotFour
     dieSlotFive
     dieSlotSix
-
 end
 
+def updateRoll
+  @diceList.each do |die|
+    die.add
+  end
+end
 
 =begin
 This is for all the mouse events
@@ -202,65 +229,49 @@ The problem was it was not saving the dice to a variable correctly
 =end
 
 on :mouse_down do |event|
-  puts event.x, event.y
+  #puts event.x, event.y
   # This is for Slot 1
   if event.x > 100 && event.x < 200 && event.y > 100 && event.y < 200
-    @slotOne.remove
-    @slotOne.x = 20
-    @slotOne.y = 20
-    @slotOne.add
+    # TODO: Add the dice to the list then delete the old dice from the list so it is not rerolled
+    # #TODO: Problem having now is the player list is not being updated on the reroll maybe create a update method
+    @playerList << @diceList[0]
+    @diceList.delete_at(0)
+    @playerList[0].x = 20
+    @playerList[0].y = 20
+    @playerList[0].add   
   end
 
   # This is for Slot 2
   if event.x > 300 && event.x < 400 && event.y > 100 && event.y < 200
-    @slotTwo.remove
-    @slotTwo.x = 100
-    @slotTwo.y = 20
-    @slotTwo.add
+
   end
 
   # This is for Slot 3
   if event.x > 500 && event.x < 600 && event.y > 100 && event.y < 200
-    @slotThree.remove
-    @slotThree.x = 180
-    @slotThree.y = 20
-    @slotThree.add
   end
 
   # This is for Slot 4
   if event.x > 100 && event.x < 200 && event.y > 300 && event.y < 400
-    @slotFour.remove
-    @slotFour.x = 260
-    @slotFour.y = 20
-    @slotFour.add
+ 
   end
 
   # This is for Slot 5
   if event.x > 300 && event.x < 400 && event.y > 300 && event.y < 400
-    @slotFive.remove
-    @slotFive.x = 340
-    @slotFive.y = 20
-    @slotFive.add
+
   end
 
   # This is for Slot 6
   if event.x > 500 && event.x < 600 && event.y > 300 && event.y < 400
-    @slotSix.remove
-    @slotSix.x = 420
-    @slotSix.y = 20
-    @slotSix.add
+ 
   end
 
   # This is for the roll button
   if event.x > 225 && event.x < 425 && event.y > 180 && event.y < 280
-    
+    clearDiceSlots   
     rollAllDice
+    updateRoll
   end
-
- 
 end
-
   # TODO: On the if statements hold the object that is clicked on so when that dice does not roll with the rest
 
-
-show
+  show
