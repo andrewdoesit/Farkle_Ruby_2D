@@ -2,6 +2,9 @@
 
 Welcome to Farkle Ruby! This is a work-in-progress implementation of the classic dice game Farkle, written in Ruby.
 
+I Will be working on this project quite often until its finished then I plan on rewriting it
+Possibly just be doing it in Unity after this is done
+
 ## Overview
 
 Farkle is a fun and exciting dice game where players roll six dice in order to score points. The game is played with two or more players, and the goal is to reach a predetermined score (usually 10,000 points) before your opponents. Each player takes turns rolling the dice, trying to accumulate points without rolling Farkle (a roll that scores no points and forfeits the player's turn).
