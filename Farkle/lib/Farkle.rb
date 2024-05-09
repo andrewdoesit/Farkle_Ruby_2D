@@ -102,22 +102,27 @@ def roll
     puts "You rolled a #{@roll}"
   end
 
-  #TODO: if the dice eqaul the same value then show both of them on the screen
+  #TODO: Working on getting this correct the dice add to the list but it resets after you roll again
 
 def dieSlotOne
-  unless @diceList.include?(@slotOne) or !@diceList.include?(@slotOne)
-      roll
-      case @roll
-      when 1 then @slotOne = @diceSlotOne[0]
-      when 2 then @slotOne = @diceSlotOne[1]
-      when 3 then @slotOne = @diceSlotOne[2]
-      when 4 then @slotOne = @diceSlotOne[3]
-      when 5 then @slotOne = @diceSlotOne[4]
-      when 6 then @slotOne = @diceSlotOne[5]
-    end
-    @diceList << @slotOne
+  if @playerList.include?(@slotOne)
+    puts "Your dice is stored in the diceList"
+    @diceList[0].x = 20
+    @diceList[0].y = 20
+    @diceList[0].add
   else
-    puts "You can't roll the same dice twice!"
+    @playerList.delete(@slotOne)
+    roll
+    case @roll
+    when 1 then @slotOne = @diceSlotOne[0]
+    when 2 then @slotOne = @diceSlotOne[1]
+    when 3 then @slotOne = @diceSlotOne[2]
+    when 4 then @slotOne = @diceSlotOne[3]
+    when 5 then @slotOne = @diceSlotOne[4]
+    when 6 then @slotOne = @diceSlotOne[5]
+    end
+    @playerList.unshift(@slotOne)
+    
   end
 end
 
