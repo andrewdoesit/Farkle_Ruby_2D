@@ -107,9 +107,9 @@ def roll
 def dieSlotOne
   if @playerList.include?(@slotOne)
     puts "Your dice is stored in the diceList"
-    @diceList[0].x = 20
-    @diceList[0].y = 20
-    @diceList[0].add
+    @playerList[0].x = 20
+    @playerList[0].y = 20
+    @playerList[0].add
   else
     @playerList.delete(@slotOne)
     roll
