@@ -8,18 +8,16 @@ set( { :background => "navy" } )
 # You can also write this:
 # set :title 'Farkle!', background: 'navy'
 
-=begin
-TODO: Get the dice to save the object to a variable
-if that doesnt work create a new sprite image to overlay the old sprite image
-=end
-
-
+pointDisplay = Text.new( @playerPoints, x: 400, y: 400, size: 50, color: 'red' )
+Text.new( 'Points: ', x: 150, y: 400, size: 50, color: 'red' )
 rollButton = Rectangle.new( x: 225, y: 180, width: 200, height: 100, color: 'red' )
 text = Text.new( 'Roll', x: 250, y: 200, size: 75, color: 'white' )
 @diceList = []
 @playerList = []
+@diceNumbers = []
+@playerPointsList = []
+@playerPoints = 0
 
-# Create all the dice for the slots within lists 
 
 @diceSlotOne = [
   Sprite.new('Sprites/dieWhite1.png', x: 100, y: 100),
@@ -97,23 +95,32 @@ text = Text.new( 'Roll', x: 250, y: 200, size: 75, color: 'white' )
 end
 
 
+
+
 def roll
     @roll = [*1..6].sample
-    puts "You rolled a #{@roll}"
   end
+
 
 def dieSlotOne
 
   if @playerList.include?(@slotOne)
-    puts "Your dice is stored in the diceList"
+    if @playerPointsList.include?(@diceNumbers[0])
+    puts "Your dice is stored in the diceList and in the playerPointsList #{@playerPointsList}"
     @playerList[0].x = 20
     @playerList[0].y = 20
     @playerList[0].add
+    else
+    @playerPointsList << @diceNumbers[0]
+    puts "The player List has been updated with #{@playerPointsList}"
+    @playerList[0].x = 20
+    @playerList[0].y = 20
+    @playerList[0].add
+    end
   
   else
     @diceList.delete(@slotOne)
     roll
-
     case @roll
     when 1 then @slotOne = @diceSlotOne[0]
     when 2 then @slotOne = @diceSlotOne[1]
@@ -122,19 +129,28 @@ def dieSlotOne
     when 5 then @slotOne = @diceSlotOne[4]
     when 6 then @slotOne = @diceSlotOne[5]
     end
-
+    @diceNumbers.insert(0, @roll)
     @diceList.insert(0, @slotOne)    
     @diceList[0].add    
   end
 end
 
 
+
 def dieSlotTwo
   if @playerList.include?(@slotTwo)
-    puts "Your dice is stored in the diceList"
-    @playerList[1].x = 100
-    @playerList[1].y = 20
-    @playerList[1].add
+    if @playerPointsList.include?(@diceNumbers[1])
+      puts "Your dice is stored in the diceList and in the playerPointsList #{@playerPointsList}"
+      @playerList[1].x = 100
+      @playerList[1].y = 20
+      @playerList[1].add
+    else
+      @playerPointsList << @diceNumbers[1]
+      puts "The player List has been updated with #{@playerPointsList}"
+      @playerList[1].x = 100
+      @playerList[1].y = 20
+      @playerList[1].add
+    end
 
   else
     @diceList.delete(@slotTwo)
@@ -147,17 +163,28 @@ def dieSlotTwo
       when 5 then @slotTwo = @diceSlotTwo[4]
       when 6 then @slotTwo = @diceSlotTwo[5]
     end
+    @diceNumbers.insert(1, @roll)
     @diceList.insert(1, @slotTwo)
     @diceList[1].add
   end
 end
 
+
+
 def dieSlotThree
   if @playerList.include?(@slotThree)
-    puts "Your dice is stored in the diceList"
-    @playerList[2].x = 180
-    @playerList[2].y = 20
-    @playerList[2].add
+    if @playerPointsList.include?(@diceNumbers[2])
+      puts "Your dice is stored in the diceList and in the playerPointsList #{@playerPointsList}"
+      @playerList[2].x = 180
+      @playerList[2].y = 20
+      @playerList[2].add
+    else
+      @playerPointsList << @diceNumbers[2]
+      puts "The player List has been updated with #{@playerPointsList}"
+      @playerList[2].x = 180
+      @playerList[2].y = 20
+      @playerList[2].add
+    end
 
   else
     @diceList.delete(@slotThree)
@@ -170,18 +197,29 @@ def dieSlotThree
       when 5 then @slotThree = @diceSlotThree[4]
       when 6 then @slotThree = @diceSlotThree[5]
     end
+    @diceNumbers.insert(2, @roll)
     @diceList.insert(2, @slotThree)
     @diceList[2].add
   end
 end
 
 
+
 def dieSlotFour
   if @playerList.include?(@slotFour)
-    puts "Your dice is stored in the diceList"
-    @playerList[3].x = 260
-    @playerList[3].y = 20
-    @playerList[3].add
+    if @playerPointsList.include?(@diceNumbers[3])
+      puts "Your dice is stored in the diceList and in the playerPointsList #{@playerPointsList}"
+      @playerList[3].x = 260
+      @playerList[3].y = 20
+      @playerList[3].add
+    else
+      @playerPointsList << @diceNumbers[3]
+      puts "The player List has been updated with #{@playerPointsList}"
+      @playerList[3].x = 260
+      @playerList[3].y = 20
+      @playerList[3].add
+    end
+
   else
     @diceList.delete(@slotFour)
       roll
@@ -193,17 +231,29 @@ def dieSlotFour
       when 5 then @slotFour = @diceSlotFour[4]
       when 6 then @slotFour = @diceSlotFour[5]
     end
+    @diceNumbers.insert(3, @roll)
     @diceList.insert(3, @slotFour)
     @diceList[3].add
   end
 end
 
+
+
 def dieSlotFive
   if @playerList.include?(@slotFive)
-    puts "Your dice is stored in the diceList"
+    if @playerPointsList.include?(@diceNumbers[4])
+    puts "Your dice is stored in the diceList and in the playerPointsList #{@playerPointsList}"
     @playerList[4].x = 340
     @playerList[4].y = 20
     @playerList[4].add
+    else
+      @playerPointsList << @diceNumbers[4]
+      puts "The player List has been updated with #{@playerPointsList}"
+      @playerList[4].x = 340
+      @playerList[4].y = 20
+      @playerList[4].add
+    end
+
   else
     @diceList.delete(@slotFive)
       roll
@@ -215,6 +265,7 @@ def dieSlotFive
       when 5 then @slotFive = @diceSlotFive[4]
       when 6 then @slotFive = @diceSlotFive[5]
     end
+    @diceNumbers.insert(4, @roll)
     @diceList.insert(4, @slotFive)
     @diceList[4].add
   end
@@ -222,10 +273,20 @@ end
 
 def dieSlotSix
   if @playerList.include?(@slotSix)
-    puts "Your dice is stored in the diceList"
-    @playerList[5].x = 420
-    @playerList[5].y = 20
-    @playerList[5].add
+    if @playerPointsList.include?(@diceNumbers[5])
+      puts "Your dice is stored in the diceList and in the playerPointsList #{@playerPointsList}"
+      @playerList[5].x = 420
+      @playerList[5].y = 20
+      @playerList[5].add
+    else
+      @playerPointsList << @diceNumbers[5]
+      puts "The player List has been updated with #{@playerPointsList}"
+      @playerList[5].x = 420
+      @playerList[5].y = 20
+      @playerList[5].add
+    end
+
+
   else
     @diceList.delete(@slotSix)
       roll
@@ -237,6 +298,7 @@ def dieSlotSix
       when 5 then @slotSix = @diceSlotSix[4]
       when 6 then @slotSix = @diceSlotSix[5]
     end
+    @diceNumbers.insert(5, @roll)
     @diceList.insert(5, @slotSix)
     @diceList[5].add
   end
@@ -256,10 +318,33 @@ If you roll a 1, 2, 3, 4, 5, and 6 then you get 1000 points
 3 pairs of the same values is worth 1500 points
 2 Triplets of the same values is worth 2500 points
 and 4 of the same values && a pair is worth 1500 points
-
-
 =end
 
+def pointLogic
+
+  #TODO: If the points are added to the playerPointsList and another point is added dont add it again
+
+  if @playerPointsList.count(1) == 1
+    @playerPoints += 100
+
+
+    puts "#{@playerPoints}"
+  elsif @playerPointsList.count(5) == 3
+    @playerPoints += 50
+    puts "#{@playerPoints}"
+  else
+    # Empty Block to do nothing if those values do not exist
+    puts "Not Working"
+  end   
+end
+
+# The update loop will keep the bank of points up to date
+
+
+
+update do
+
+end
 
 
 def rollAllDice
@@ -285,40 +370,73 @@ The problem was it was not saving the dice to a variable correctly
 
 on :mouse_down do |event|
   #puts event.x, event.y
-  # This is for Slot 1
+
+  # This is for Slot 1 
   if event.x > 100 && event.x < 200 && event.y > 100 && event.y < 200
+    unless @playerList.include?(@diceNumbers[0])
     @playerList.insert(0, @slotOne)
-    dieSlotOne   
+    dieSlotOne
+    pointLogic
+    else
+      puts "Dice is already in the list"
+    end
   end
 
   # This is for Slot 2
   if event.x > 300 && event.x < 400 && event.y > 100 && event.y < 200
+    unless @playerList.include?(@diceNumbers[1])
     @playerList.insert(1, @slotTwo)
     dieSlotTwo
+    pointLogic
+    else
+      puts "Dice is already in the list"
+    end
   end
 
   # This is for Slot 3
   if event.x > 500 && event.x < 600 && event.y > 100 && event.y < 200
+    unless @playerList.include?(@diceNumbers[2])
     @playerList.insert(2, @slotThree)
     dieSlotThree
+    pointLogic
+    else
+      puts "Dice is already in the list"
+    end
   end
 
   # This is for Slot 4
   if event.x > 100 && event.x < 200 && event.y > 300 && event.y < 400
+    unless @playerList.include?(@diceNumbers[3])
     @playerList.insert(3, @slotFour)
     dieSlotFour
+    pointLogic
+    else
+      puts "Dice is already in the list"
+    end
   end
 
   # This is for Slot 5
   if event.x > 300 && event.x < 400 && event.y > 300 && event.y < 400
+    unless @playerList.include?(@diceNumbers[4])
     @playerList.insert(4, @slotFive)
     dieSlotFive
+    pointLogic
+    else
+      puts "Dice is already in the list"
+    end
   end
 
   # This is for Slot 6
+
+  # TODO: Its not able to insert the dice if it is already in the list
   if event.x > 500 && event.x < 600 && event.y > 300 && event.y < 400
+    unless @playerList.include?(@diceNumbers[5])
     @playerList.insert(5, @slotSix)
     dieSlotSix
+    pointLogic
+    else
+      puts "Dice is already in the list"
+    end
   end
 
   # This is for the roll button
@@ -329,4 +447,5 @@ on :mouse_down do |event|
   end
 end
   # TODO: On the if statements hold the object that is clicked on so when that dice does not roll with the rest
-show
+
+  show
