@@ -8,7 +8,9 @@ set( { :background => "navy" } )
 # You can also write this:
 # set :title 'Farkle!', background: 'navy'
 
-pointDisplay = Text.new( @playerPoints, x: 400, y: 400, size: 50, color: 'red' )
+
+@pointDisplay = Text.new( @playerPoints, x: 400, y: 400, size: 50, color: 'red' )
+
 Text.new( 'Points: ', x: 150, y: 400, size: 50, color: 'red' )
 rollButton = Rectangle.new( x: 225, y: 180, width: 200, height: 100, color: 'red' )
 text = Text.new( 'Roll', x: 250, y: 200, size: 75, color: 'white' )
@@ -17,6 +19,7 @@ text = Text.new( 'Roll', x: 250, y: 200, size: 75, color: 'white' )
 @diceNumbers = []
 @playerPointsList = []
 @playerPoints = 0
+@point
 
 
 @diceSlotOne = [
@@ -93,6 +96,7 @@ text = Text.new( 'Roll', x: 250, y: 200, size: 75, color: 'white' )
       die.remove
   end
 end
+# Added this up here instead of in the roll method
 
 
 
@@ -319,29 +323,56 @@ If you roll a 1, 2, 3, 4, 5, and 6 then you get 1000 points
 2 Triplets of the same values is worth 2500 points
 and 4 of the same values && a pair is worth 1500 points
 =end
-
+@pointsAdded = false
 def pointLogic
 
   #TODO: If the points are added to the playerPointsList and another point is added dont add it again
+  #TODO: If the roll creates @diceNumbers with the same values thats the only way to get alot of points
+  # TODO: if the playerPointList has a 1 in it then it always runs 100 points i need to correct this
 
-  if @playerPointsList.count(1) == 1
-    @playerPoints += 100
+  # Probably dont need the bool variable here. Deleting the value aloud for it to run correctly
+  # I will keep track of the multiple 1's and 5's in the rollPointLogic  
+  if @pointsAdded == false
+    if @playerPointsList.count(1) == 1
+      @playerPoints += 100
+      @playerPointList.delete(1)
+      @pointDisplay.remove
+      @pointDisplay = Text.new( @playerPoints, x: 400, y: 400, size: 50, color: 'red' )
+      @pointsAdded = true
+    
+    elsif @playerPointsList.count(5) == 1
+      @playerPoints += 50
+      @playerPointsList.delete(5)
+      @pointDisplay.remove
+      @pointDisplay = Text.new( @playerPoints, x: 400, y: 400, size: 50, color: 'red' )
+      @pointsAdded = true
+    end
 
-
-    puts "#{@playerPoints}"
-  elsif @playerPointsList.count(5) == 3
-    @playerPoints += 50
-    puts "#{@playerPoints}"
-  else
-    # Empty Block to do nothing if those values do not exist
-    puts "Not Working"
+  else @pointsAdded == true
+    if @playerPointsList.count(1) == 1
+      @playerPoints += 100
+      @pointDisplay.remove
+      @pointDisplay = Text.new( @playerPoints, x: 400, y: 400, size: 50, color: 'red' )
+    
+    elsif @playerPointsList.count(5) == 1
+      @playerPoints = @playerPoints
+      @playerPoints += 50
+      @pointDisplay.remove
+      @pointDisplay = Text.new( @playerPoints, x: 400, y: 400, size: 50, color: 'red' )
+    end
   end   
 end
 
+def rollPointLogic
+  if @diceNumbers.count(1) == 0 && @diceNumbers.count(5) == 0
+    puts "You Lose!!!"
+  else
+
+  end
+end
+
+
 # The update loop will keep the bank of points up to date
-
-
-
 update do
 
 end
@@ -439,11 +470,15 @@ on :mouse_down do |event|
     end
   end
 
+
+  # TODO: This needs to be fixed figure out what is going on with the roll button
+  # TODO: Returns a nil in the @playerList for some reason might have to have a check value
   # This is for the roll button
   if event.x > 225 && event.x < 425 && event.y > 180 && event.y < 280
     clearDiceSlots   
     rollAllDice
     updateRoll
+    #rollPointLogic
   end
 end
   # TODO: On the if statements hold the object that is clicked on so when that dice does not roll with the rest
